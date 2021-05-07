@@ -1,4 +1,6 @@
-﻿Public Class Door
+﻿' Door class takes location to draw and if doors are close are open
+
+Public Class Door
     Public Property x As Integer
     Public Property y As Integer
     Public Property width As Integer

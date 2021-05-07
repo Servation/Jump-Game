@@ -1,4 +1,6 @@
-﻿Public Class Spike
+﻿' Spike Class takes the starting position and how many 70x70 blocks of spikes 
+
+Public Class Spike
     Public Property x As Integer
     Public Property y As Integer
     Public Property nSpikes As Integer

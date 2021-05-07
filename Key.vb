@@ -1,4 +1,6 @@
-﻿Public Class Key
+﻿' Key Class has 3 different keys that can be used each key has HUD key, key and key hole image
+
+Public Class Key
     Public Property color As String
     Public Property xHUD As Integer
     Public Property yHUD As Integer

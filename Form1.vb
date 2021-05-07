@@ -17,6 +17,7 @@
     Private transistion As Boolean = True
     Private counter As Integer = 0
 
+    ' Draws everything to Form1
     Private Sub Form1_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
         Dim G As Graphics = e.Graphics
         G.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
@@ -82,6 +83,7 @@
         CopyResourceToDisk()
     End Sub
 
+    ' Starting controls
     Private Sub Start()
         MainRect = DisplayRectangle
         Jumper = New Character(MainRect)
@@ -128,6 +130,7 @@
         Slime(1).moveRight = True
     End Sub
 
+    ' Movement controls
     Private Sub Movement()
         If Not transistion Then
             If keysPressed.Contains(Keys.A) And Jumper.speedX > -Jumper.maxSpeed And Not Jumper.jumping Then
@@ -148,6 +151,7 @@
         End If
     End Sub
 
+    ' Adds and removes keys pressed to Hashset
     Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         keysPressed.Add(e.KeyCode)
     End Sub
@@ -156,6 +160,7 @@
         keysPressed.Remove(e.KeyCode)
     End Sub
 
+    ' Timer that controls when and where everything is drawn 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
         Movement()
         Jumper.Update()
@@ -180,6 +185,7 @@
         counter += 1
     End Sub
 
+    ' Logic for stage one
     Private Sub StageOne()
         If s1 Then
             For i As Integer = 0 To logicalSlime
@@ -244,6 +250,8 @@
             Next
         End If
     End Sub
+
+    ' Resets stage two
     Public Sub resetStageOne()
         PlaySound("fail.wav")
         Jumper.speedX = 0
@@ -258,6 +266,8 @@
         bKeys.kHVisible = True
         doors(0).open = False
     End Sub
+
+    ' Logic for stage two
     Private Sub StageTwo()
         If s2 Then
             For i As Integer = 0 To logicalSlime
@@ -339,6 +349,8 @@
             Next
         End If
     End Sub
+
+    ' Resets stage two
     Private Sub resetStageTwo()
         PlaySound("fail.wav")
         Jumper.speedX = 0
@@ -351,6 +363,8 @@
         Slime(0).x = platforms(4).x + platforms(4).width / 2
         Slime(0).moveRight = True
     End Sub
+
+    ' Stage three logic
     Private Sub StageThree()
         If s3 Then
             For i As Integer = 0 To logicalSlime
@@ -421,6 +435,8 @@
             Next
         End If
     End Sub
+
+    ' Resets stage three
     Private Sub resetStageThree()
         PlaySound("fail.wav")
         Jumper.speedX = -3
@@ -437,9 +453,13 @@
         bKeys.keyVisible = True
         doors(2).open = False
     End Sub
+
+    ' Check if there is collision between to rectangles
     Private Function RectsCollision(r1x As Double, r1y As Double, r1w As Double, r1h As Double, r2x As Double, r2y As Double, r2w As Double, r2h As Double) As Boolean
         Return (r1x + r1w >= r2x And r1x <= r2x + r2w And r1y + r1h >= r2y And r1y <= r2y + r2h)
     End Function
+
+    ' Collision system for jumper and platforms
     Private Sub resCol(r1x As Double, r1y As Double, r1w As Double, r1h As Double)
         Dim tempX = 0
         Dim tempY = 0
@@ -510,6 +530,8 @@
             End If
         End If
     End Sub
+
+    ' Plays a chosen sound
     Private Sub PlaySound(s As String)
         Try
             mciSendString("close myWAV" & s, Nothing, 0, 0)
@@ -525,6 +547,8 @@
             Me.Text = ex.Message
         End Try
     End Sub
+
+    ' Copy sounds to current directory
     Private Sub CopyResourceToDisk()
         If Not IO.File.Exists("jump.wav") Then
             Dim bts(CInt(My.Resources.jump.Length - 1)) As Byte
@@ -552,10 +576,13 @@
             IO.File.WriteAllBytes("fail.wav", bts)
         End If
     End Sub
+
+    ' Function to play sounds
     Private Declare Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" _
     (ByVal lpstrCommand As String, ByVal lpstrReturnString As String,
     ByVal uReturnLength As Integer, ByVal hwndCallback As Integer) As Integer
 
+    ' Button controls
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         lblTitle.Visible = False
         btnQuit.Visible = False

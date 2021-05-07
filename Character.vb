@@ -1,4 +1,6 @@
-﻿Public Class Character
+﻿' Character class allows control character being drawn.
+
+Public Class Character
     Public Property x As Double
     Public Property y As Double
     Public Property speedX As Decimal

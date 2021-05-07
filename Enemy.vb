@@ -1,4 +1,6 @@
-﻿Public Class Enemy
+﻿' Enemy class controls where slimes are being drawn, gives where and size of slimes
+
+Public Class Enemy
     Public Property x As Integer
     Public Property y As Integer
     Public Property xleft As Integer
