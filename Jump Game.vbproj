@@ -231,5 +231,17 @@
   <ItemGroup>
     <None Include="Resources\538540__sjonas88__fail-sound.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\448266__henryrichard__sfx-clear.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\castleLeft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\castleRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\castle.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

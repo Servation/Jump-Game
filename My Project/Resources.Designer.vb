@@ -92,6 +92,36 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property castle() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("castle", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property castleLeft() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("castleLeft", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property castleRight() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("castleRight", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property door_closedMid() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("door_closedMid", resourceCulture)
@@ -135,6 +165,15 @@ Namespace My.Resources
         Friend ReadOnly Property fail() As System.IO.UnmanagedMemoryStream
             Get
                 Return ResourceManager.GetStream("fail", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        '''</summary>
+        Friend ReadOnly Property finish() As System.IO.UnmanagedMemoryStream
+            Get
+                Return ResourceManager.GetStream("finish", resourceCulture)
             End Get
         End Property
         

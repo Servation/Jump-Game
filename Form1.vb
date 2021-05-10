@@ -115,7 +115,7 @@
         platforms(2).x = 119
         platforms(2).y = 382
         platforms(2).nBlocks = 2
-        platforms(3).x = 0
+        platforms(3).x = -10
         platforms(3).y = 780
         platforms(3).nBlocks = 21
         Slime(0).x = platforms(0).x + platforms(0).width / 2
@@ -165,7 +165,6 @@
         Movement()
         Jumper.Update()
         If Jumper.running And Not Jumper.frameCount > 9 Then
-            Debug.WriteLine(Timer2.Interval)
             If counter Mod 3 = 0 Then
                 Jumper.frameCount += 1
             End If
@@ -237,7 +236,7 @@
                 platforms(3).nBlocks = 2
                 platforms(4).x = 504
                 platforms(4).y = 780
-                platforms(4).nBlocks = 13
+                platforms(4).nBlocks = 14
                 logicalSlime = 0
                 Slime(0).x = platforms(4).x + platforms(4).width / 2
                 Slime(0).y = platforms(4).y - Slime(0).height
@@ -429,6 +428,7 @@
                 btnStart.Visible = True
                 Start()
                 btnStart.Text = "Play Again"
+                PlaySound("finish.wav")
             End If
             For i As Integer = 0 To logicalSlime
                 Slime(i).update()
@@ -574,6 +574,11 @@
             Dim bts(CInt(My.Resources.fail.Length - 1)) As Byte
             My.Resources.fail.Read(bts, 0, bts.Length)
             IO.File.WriteAllBytes("fail.wav", bts)
+        End If
+        If Not IO.File.Exists("finish.wav") Then
+            Dim bts(CInt(My.Resources.finish.Length - 1)) As Byte
+            My.Resources.finish.Read(bts, 0, bts.Length)
+            IO.File.WriteAllBytes("finish.wav", bts)
         End If
     End Sub
 

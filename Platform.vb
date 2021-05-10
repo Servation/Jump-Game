@@ -30,9 +30,19 @@
     End Sub
 
     Public Sub show(G As Graphics)
-        For i As Integer = 0 To nB
-            G.DrawImage(My.Resources.block, x + (i * 70), y, 70, 70)
-        Next
+        If nB = 0 Then
+            G.DrawImage(My.Resources.castle, x + (0 * 70), y, 70, 70)
+        Else
+            For i As Integer = 0 To nB
+                If i = 0 Then
+                    G.DrawImage(My.Resources.castleLeft, x + (i * 70), y, 70, 70)
+                ElseIf i = nB Then
+                    G.DrawImage(My.Resources.castleRight, x + (i * 70), y, 70, 70)
+                Else
+                    G.DrawImage(My.Resources.block, x + (i * 70), y, 70, 70)
+                End If
+            Next
+        End If
     End Sub
 
 End Class
