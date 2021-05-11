@@ -4,12 +4,12 @@ Public Class Door
     Public Property x As Integer
     Public Property y As Integer
     Public Property width As Integer
-    Public ReadOnly Property xhb As Integer
+    Public ReadOnly Property xHitBox As Integer
         Get
             Return x + 50
         End Get
     End Property
-    Public ReadOnly Property yhb As Integer
+    Public ReadOnly Property yHitBox As Integer
         Get
             Return y + 50
         End Get

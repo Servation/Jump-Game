@@ -133,19 +133,19 @@
     ' Movement controls
     Private Sub Movement()
         If Not transistion Then
-            If keysPressed.Contains(Keys.A) And Jumper.speedX > -Jumper.maxSpeed And Not Jumper.jumping Then
-                Jumper.speedX -= 1
-                Jumper.DirectionRight = False
-                Jumper.running = True
+            If keysPressed.Contains(Keys.A) And Jumper.xSpeed > -Jumper.maxSpeed And Not Jumper.isJumping Then
+                Jumper.xSpeed -= 1
+                Jumper.moveRight = False
+                Jumper.isMoving = True
             End If
-            If keysPressed.Contains(Keys.D) And Jumper.speedX < Jumper.maxSpeed And Not Jumper.jumping Then
-                Jumper.speedX += 1
-                Jumper.DirectionRight = True
-                Jumper.running = True
+            If keysPressed.Contains(Keys.D) And Jumper.xSpeed < Jumper.maxSpeed And Not Jumper.isJumping Then
+                Jumper.xSpeed += 1
+                Jumper.moveRight = True
+                Jumper.isMoving = True
             End If
-            If keysPressed.Contains(Keys.Space) And Not Jumper.jumping Then
-                Jumper.speedY = -11.5
-                Jumper.jumping = True
+            If keysPressed.Contains(Keys.Space) And Not Jumper.isJumping Then
+                Jumper.ySpeed = -11.5
+                Jumper.isJumping = True
                 PlaySound("jump.wav")
             End If
         End If
@@ -164,12 +164,12 @@
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
         Movement()
         Jumper.Update()
-        If Jumper.running And Not Jumper.frameCount > 9 Then
+        If Jumper.isMoving And Not Jumper.framesCount > 9 Then
             If counter Mod 3 = 0 Then
-                Jumper.frameCount += 1
+                Jumper.framesCount += 1
             End If
         Else
-            Jumper.frameCount = 0
+            Jumper.framesCount = 0
         End If
         If s1 Then
             StageOne()
@@ -209,12 +209,12 @@
                     doors(0).open = True
                 End If
             End If
-            If doors(0).open And RectsCollision(doors(0).xhb, doors(0).yhb, 10, 70, Jumper.x, Jumper.y, 72, 97) And Not Jumper.jumping Then
+            If doors(0).open And RectsCollision(doors(0).xHitBox, doors(0).yHitBox, 10, 70, Jumper.x, Jumper.y, 72, 97) And Not Jumper.isJumping Then
                 transistion = True
                 s1 = False
                 s2 = True
-                Jumper.speedX = -3
-                Jumper.DirectionRight = False
+                Jumper.xSpeed = -3
+                Jumper.moveRight = False
                 bKeys.xKey = 35
                 bKeys.yKey = 704
                 bKeys.xKeyH = 1002
@@ -253,8 +253,8 @@
     ' Resets stage two
     Public Sub resetStageOne()
         PlaySound("fail.wav")
-        Jumper.speedX = 0
-        Jumper.DirectionRight = True
+        Jumper.xSpeed = 0
+        Jumper.moveRight = True
         Jumper.x = 70
         Jumper.y = MainRect.Height - (70 + 93)
         Slime(0).x = platforms(0).x + platforms(0).width / 2
@@ -294,11 +294,11 @@
                     doors(1).open = True
                 End If
             End If
-            If doors(1).open And RectsCollision(doors(1).xhb, doors(1).yhb, 10, 70, Jumper.x, Jumper.y, 72, 97) And Not Jumper.jumping Then
+            If doors(1).open And RectsCollision(doors(1).xHitBox, doors(1).yHitBox, 10, 70, Jumper.x, Jumper.y, 72, 97) And Not Jumper.isJumping Then
                 transistion = True
                 s2 = False
-                Jumper.speedX = -3
-                Jumper.DirectionRight = False
+                Jumper.xSpeed = -3
+                Jumper.moveRight = False
                 spikes.x = 0
                 spikes.y = 780
                 spikes.nSpikes = 22
@@ -352,8 +352,8 @@
     ' Resets stage two
     Private Sub resetStageTwo()
         PlaySound("fail.wav")
-        Jumper.speedX = 0
-        Jumper.DirectionRight = False
+        Jumper.xSpeed = 0
+        Jumper.moveRight = False
         Jumper.x = 1332
         Jumper.y = 640
         bKeys.keyVisible = True
@@ -421,7 +421,7 @@
             If gKeys.kHVisible = False And rKeys.kHVisible = False And bKeys.kHVisible = False Then
                 doors(2).open = True
             End If
-            If doors(2).open And RectsCollision(doors(2).xhb, doors(2).yhb, 10, 70, Jumper.x, Jumper.y, 72, 97) And Not Jumper.jumping Then
+            If doors(2).open And RectsCollision(doors(2).xHitBox, doors(2).yHitBox, 10, 70, Jumper.x, Jumper.y, 72, 97) And Not Jumper.isJumping Then
                 s3 = False
                 lblTitle.Visible = True
                 btnQuit.Visible = True
@@ -439,8 +439,8 @@
     ' Resets stage three
     Private Sub resetStageThree()
         PlaySound("fail.wav")
-        Jumper.speedX = -3
-        Jumper.DirectionRight = False
+        Jumper.xSpeed = -3
+        Jumper.moveRight = False
         Jumper.x = 1340
         Jumper.y = 56
         Slime(0).x = platforms(1).x + platforms(1).width / 2
@@ -477,18 +477,18 @@
                 tempY = r1y + r1h - Jumper.y
                 If tempX > tempY Then
                     Jumper.y = movedown + 1
-                    Jumper.speedY = 0
+                    Jumper.ySpeed = 0
                 Else
                     Jumper.x = moveright
-                    Jumper.speedX *= -1
+                    Jumper.xSpeed *= -1
                 End If
             ElseIf top And left Then
                 tempX = Jumper.x + 72 - r1x
                 tempY = Jumper.y + 97 - r1y
                 If tempX > tempY Then
                     Jumper.y = moveup
-                    Jumper.jumping = False
-                    Jumper.speedY = 0
+                    Jumper.isJumping = False
+                    Jumper.ySpeed = 0
                 Else
                     Jumper.x = moveleft
                 End If
@@ -497,8 +497,8 @@
                 tempY = Jumper.y + 97 - r1y
                 If tempX > tempY Then
                     Jumper.y = moveup
-                    Jumper.jumping = False
-                    Jumper.speedY = 0
+                    Jumper.isJumping = False
+                    Jumper.ySpeed = 0
                 Else
                     Jumper.x = moveright
                 End If
@@ -507,25 +507,25 @@
                 tempY = r1y + r1h - Jumper.y
                 If tempX > tempY Then
                     Jumper.y = movedown + 1
-                    Jumper.speedY = 0
+                    Jumper.ySpeed = 0
                 Else
                     Jumper.x = moveleft
-                    Jumper.speedX *= -1
+                    Jumper.xSpeed *= -1
                 End If
             Else
                 If top Then
                     Jumper.y = moveup
-                    Jumper.jumping = False
-                    Jumper.speedY = 0
+                    Jumper.isJumping = False
+                    Jumper.ySpeed = 0
                 ElseIf bottom Then
                     Jumper.y = movedown + 1
-                    Jumper.speedY = 0
+                    Jumper.ySpeed = 0
                 ElseIf right Then
                     Jumper.x = moveright
-                    Jumper.speedX *= -1
+                    Jumper.xSpeed *= -1
                 ElseIf left Then
                     Jumper.x = moveleft
-                    Jumper.speedX *= -1
+                    Jumper.xSpeed *= -1
                 End If
             End If
         End If
